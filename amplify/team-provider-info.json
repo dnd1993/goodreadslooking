@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-goodreadslooking-dev-131937-authRole",
+      "UnauthRoleArn": "arn:aws:iam::481218820000:role/amplify-goodreadslooking-dev-131937-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::481218820000:role/amplify-goodreadslooking-dev-131937-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-goodreadslooking-dev-131937-deployment",
+      "UnauthRoleName": "amplify-goodreadslooking-dev-131937-unauthRole",
+      "StackName": "amplify-goodreadslooking-dev-131937",
+      "StackId": "arn:aws:cloudformation:us-east-1:481218820000:stack/amplify-goodreadslooking-dev-131937/c47a54f0-d59c-11ee-82f9-0e982ea4bdff",
+      "AmplifyAppId": "d1zc0dxmo715i7"
+    },
+    "categories": {
+      "auth": {
+        "goodreadslooking36133b19": {}
+      },
+      "api": {
+        "goodreadslooking": {}
+      }
+    }
+  }
+}
