@@ -14,13 +14,26 @@ Amplify.configure(config);
 
 const client = generateClient();
 
+type User = {
+  username: string,
+  password: string,
+  options: AuthOptions
+}
+
+type AuthOptions = {
+  autoSignIn: boolean,
+  userAttributes: UserAttributes
+}
+
+type UserAttributes = {
+  email: string
+}
+
 export default function AuthenticatorWithEmail() {
   const services = {
-    async handleSignUp(formData) {
-      console.log('form data', formData);
-      let { username, password, options } = formData;
-      username = username.toLowerCase();
-      options.userAttributes.email = options.userAttributes.email.toLowerCase();
+    async handleSignUp(user: User) {
+      console.log('user', user);
+      const { username, password, options } = user;
       
       const newUser = await client.graphql({
         query: createUser,
