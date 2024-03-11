@@ -6,7 +6,7 @@ import { NavLink, BrowserRouter as Router, Routes, Route, useLocation } from 're
 import BookCard from './components/BookCard';
 import { Book } from './types/book';
 
-const categoryQueryMap = {
+const categoryQueryMap: { [key: string]: string } = {
   Trending: 'fiction', // Assuming "Trending" is mapped to popular fiction books
   Science: 'science+fiction', 
   History: 'subject:history', 
@@ -14,7 +14,7 @@ const categoryQueryMap = {
   Biography: 'subject:biography',
 };
 
-function useQueryBooks(category) {
+function useQueryBooks(category: string) {
   return useQuery({
     queryKey: ['repoData', category],
     queryFn: () =>
