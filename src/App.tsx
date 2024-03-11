@@ -5,6 +5,7 @@ import {
 } from '@tanstack/react-query';
 import { SimpleGrid } from '@chakra-ui/react';
 import BookCard from './components/BookCard';
+import { Book } from './types/book';
 
 function App() {
   const { isPending, error, data } = useQuery({
@@ -26,7 +27,7 @@ function App() {
       <button onClick={signOut}>Sign Out</button>
       <h1>Good Reads Looking App</h1>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing="10">
-        {data.items.map(book => <BookCard book={book} key={book.id} />)}
+        {data.items.map((book: Book) => <BookCard book={book} key={book.id} />)}
       </SimpleGrid>
     </>
   )

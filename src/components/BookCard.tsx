@@ -1,7 +1,10 @@
 import React from 'react';
 import { Box, Image, Text, Badge, Stack, Link } from '@chakra-ui/react';
 
-function BookCard({ book }) {
+import { BookCardProps } from '../types/book';
+
+
+function BookCard({ book }: BookCardProps) {
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p="5">
       <Box display="flex" flexDirection="column" alignItems="start">
