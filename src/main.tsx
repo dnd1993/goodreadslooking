@@ -1,5 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
+import { ChakraProvider } from '@chakra-ui/react';
+
 import App from './App.tsx'
 
 import {createUser} from './graphql/mutations.ts';
@@ -11,6 +14,14 @@ import { signUp, SignUpInput } from 'aws-amplify/auth';
 import { generateClient } from 'aws-amplify/api';
 import config from './amplifyconfiguration.json';
 Amplify.configure(config);
+
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+
+
+const queryClient = new QueryClient()
 
 const client = generateClient();
 
@@ -39,7 +50,11 @@ export default function AuthenticatorWithEmail() {
 
   return (
     <Authenticator services={services} initialState='signUp'>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider>
+          <App />
+        </ChakraProvider>
+      </QueryClientProvider>
     </Authenticator>
   )
 }
