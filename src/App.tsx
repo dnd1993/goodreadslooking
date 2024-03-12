@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import { useQuery } from '@tanstack/react-query';
-import { SimpleGrid, Button, Box, Flex } from '@chakra-ui/react';
+import { SimpleGrid, Button, Box, Flex, Text } from '@chakra-ui/react';
 import { NavLink, BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import BookCard from './components/BookCard';
 import BookDetail from './components/BookDetail';
@@ -27,7 +27,8 @@ function useQueryBooks(category: string) {
 
 function App() {
   const location = useLocation();
-  const { signOut } = useAuthenticator((context) => [context.signOut]);
+  const { user, signOut } = useAuthenticator((context) => [context.user, context.signOut]);
+  const userName = user?.username;
 
   // Determine the category based on the current path
   const categoryPath = location.pathname.substring(1).toLowerCase();
@@ -68,7 +69,10 @@ function App() {
             </NavLink>
           ))}
         </Box>
-        <Button colorScheme='cyan' onClick={signOut}>Sign Out</Button>
+        <Flex align="center">
+          {userName && <Text mr="4">Hello, {userName}</Text>}
+          <Button colorScheme='cyan' onClick={signOut}>Sign Out</Button>
+        </Flex>
       </Flex>
       <Box as="main">
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing="10">
