@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Image, Text, Badge, Stack, Link } from '@chakra-ui/react';
+import { Box, Image, Text, Badge, Stack, Link as ChakraLink } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { BookCardProps } from '../types/book';
-
 
 function BookCard({ book }: BookCardProps) {
   return (
@@ -16,26 +16,26 @@ function BookCard({ book }: BookCardProps) {
             </Badge>
           ))}
         </Box>
-        <Text mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated>
-          {book.volumeInfo.title}
-        </Text>
+        <RouterLink to={`/book/${book.id}`} style={{ textDecoration: 'none' }}>
+          <Text mt="1" fontWeight="semibold" as="h4" lineHeight="tight" isTruncated color="blue.600" _hover={{ textDecor: 'underline' }}>
+            {book.volumeInfo.title}
+          </Text>
+        </RouterLink>
         <Text>{book.volumeInfo.authors.join(', ')}</Text>
         <Text color="gray.500" isTruncated>
           {book.volumeInfo.publishedDate} • {book.volumeInfo.pageCount} pages
         </Text>
         <Stack direction="row" align="center">
-          <Link href={book.volumeInfo.previewLink} isExternal>
+          <ChakraLink href={book.volumeInfo.previewLink} isExternal>
             Preview
-          </Link>
-          <Link href={book.saleInfo.buyLink} isExternal>
+          </ChakraLink>
+          <ChakraLink href={book.saleInfo.buyLink} isExternal>
             Buy
-          </Link>
+          </ChakraLink>
         </Stack>
       </Box>
     </Box>
   );
 }
-
-
 
 export default BookCard;

@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { SimpleGrid, Button, Box, Flex } from '@chakra-ui/react';
 import { NavLink, BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import BookCard from './components/BookCard';
+import BookDetail from './components/BookDetail';
 import { Book } from './types/book';
 
 const categoryQueryMap: { [key: string]: string } = {
@@ -82,7 +83,9 @@ export default function AppWrapper() {
   return (
     <Router>
       <Routes>
-        <Route path="/*" element={<App />} />
+        <Route path="/" element={<App />} />
+        <Route path="/:category" element={<App />} />
+        <Route path="/book/:id" element={<BookDetail />} />
       </Routes>
     </Router>
   );
