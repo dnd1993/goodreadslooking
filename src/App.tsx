@@ -32,6 +32,16 @@ function App() {
   const categoryPath = location.pathname.substring(1).toLowerCase();
   const apiQuery = categoryQueryMap[categoryPath.charAt(0).toUpperCase() + categoryPath.slice(1)] || 'fiction';
 
+  // Function to determine if a link is active
+  const isActiveLink = (path: string, category: string) => {
+    // Special case for "Trending"
+    if (category.toLowerCase() === 'trending') {
+      return path === '/' || path === '/trending';
+    }
+    // General case for other categories
+    return path === `/${category.toLowerCase()}`;
+  };
+
   const { isPending, error, data } = useQueryBooks(apiQuery);
 
   if (isPending) return 'Loading...';
@@ -45,13 +55,13 @@ function App() {
         <Box>
           {categories.map((category) => (
             <NavLink
-              to={`/${category.toLowerCase()}`}
+              to={`/${category.toLowerCase() === 'trending' ? '' : category.toLowerCase()}`}
               key={category}
-              style={({ isActive }) => ({
+              style={{
                 marginRight: '8px',
                 textDecoration: 'none',
-                color: isActive ? 'blue' : 'black',
-              })}
+                color: isActiveLink(location.pathname, category) ? 'blue' : 'black',
+              }}
             >
               {category}
             </NavLink>
