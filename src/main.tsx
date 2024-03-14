@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 import { ChakraProvider } from '@chakra-ui/react';
 
 import App from './App.tsx'
@@ -63,6 +65,7 @@ export default function AuthenticatorWithEmail() {
   return (
     <Authenticator services={services} initialState='signUp'>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <ChakraProvider>
           <App />
         </ChakraProvider>
