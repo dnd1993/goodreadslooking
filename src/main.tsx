@@ -27,26 +27,38 @@ const client = generateClient();
 
 export default function AuthenticatorWithEmail() {
   const services = {
-    async handleSignUp({username, password, options}: SignUpInput) {
-      const email = options?.userAttributes?.email;
-      
-      const newUser = email && await client.graphql({
-        query: createUser,
-        variables: {
-          input: {
-            username,
-            email
-          }
+    async handleSignUp({ username, password, options }: SignUpInput) {
+      try {
+        // attempt to sign up the user with Cognito.
+        const signUpResponse = await signUp({
+          username,
+          password,
+          options,
+        });
+  
+        // If signUp is successful, proceed to create the user in the database.
+        const email = options?.userAttributes?.email;
+        if (email) {
+          const newUser = await client.graphql({
+            query: createUser,
+            variables: {
+              input: {
+                username,
+                email
+              }
+            }
+          });
+          console.log('New user created in the database:', newUser);
         }
-      })
-      console.log(newUser)
-      return await signUp({
-        username,
-        password,
-        options,
-      })
+  
+        return signUpResponse;
+      } catch (error) {
+        console.error('Sign up error:', error);
+        throw error;
+      }
     }
   }
+  
 
   return (
     <Authenticator services={services} initialState='signUp'>
