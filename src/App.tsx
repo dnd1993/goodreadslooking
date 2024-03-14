@@ -28,7 +28,7 @@ function useQueryBooks(category: string) {
 function App() {
   const location = useLocation();
   const { user, signOut } = useAuthenticator((context) => [context.user, context.signOut]);
-  const userName = user?.username;
+  const username = user?.username;
 
   // Determine the category based on the current path
   const categoryPath = location.pathname.substring(1).toLowerCase();
@@ -70,13 +70,13 @@ function App() {
           ))}
         </Box>
         <Flex align="center">
-          {userName && <Text mr="4">Hello, {userName}</Text>}
+          {username && <Text mr="4">Hello, {username}</Text>}
           <Button colorScheme='cyan' onClick={signOut}>Sign Out</Button>
         </Flex>
       </Flex>
       <Box as="main">
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing="10">
-          {data?.items?.map((book: Book) => <BookCard book={book} key={book.id} />)}
+          {data?.items?.map((book: Book) => <BookCard book={book} key={book.id} username={username} />)}
         </SimpleGrid>
       </Box>
     </Box>

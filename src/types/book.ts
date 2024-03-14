@@ -1,5 +1,6 @@
 export type BookCardProps = {
-    book: Book
+    book: Book,
+    username: string
 }
 
 export type Book = {

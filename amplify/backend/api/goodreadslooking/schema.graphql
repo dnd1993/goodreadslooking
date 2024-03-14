@@ -4,7 +4,7 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONL
 
 type User @model {
   id: ID!
-  username: String!
+  username: String @index(name: "byUsername", queryField: "userByUsername")
   email: String!
   toRead: [String]   # List of book IDs user wants to read
   read: [String]     # List of book IDs user has already read

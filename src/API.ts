@@ -4,7 +4,7 @@
 
 export type CreateUserInput = {
   id?: string | null,
-  username: string,
+  username?: string | null,
   email: string,
   toRead?: Array< string | null > | null,
   read?: Array< string | null > | null,
@@ -63,7 +63,7 @@ export type ModelSizeInput = {
 export type User = {
   __typename: "User",
   id: string,
-  username: string,
+  username?: string | null,
   email: string,
   toRead?: Array< string | null > | null,
   read?: Array< string | null > | null,
@@ -116,6 +116,12 @@ export type ModelUserConnection = {
   nextToken?: string | null,
 };
 
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelSubscriptionUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   username?: ModelSubscriptionStringInput | null,
@@ -165,7 +171,7 @@ export type CreateUserMutation = {
   createUser?:  {
     __typename: "User",
     id: string,
-    username: string,
+    username?: string | null,
     email: string,
     toRead?: Array< string | null > | null,
     read?: Array< string | null > | null,
@@ -183,7 +189,7 @@ export type UpdateUserMutation = {
   updateUser?:  {
     __typename: "User",
     id: string,
-    username: string,
+    username?: string | null,
     email: string,
     toRead?: Array< string | null > | null,
     read?: Array< string | null > | null,
@@ -201,7 +207,7 @@ export type DeleteUserMutation = {
   deleteUser?:  {
     __typename: "User",
     id: string,
-    username: string,
+    username?: string | null,
     email: string,
     toRead?: Array< string | null > | null,
     read?: Array< string | null > | null,
@@ -218,7 +224,7 @@ export type GetUserQuery = {
   getUser?:  {
     __typename: "User",
     id: string,
-    username: string,
+    username?: string | null,
     email: string,
     toRead?: Array< string | null > | null,
     read?: Array< string | null > | null,
@@ -239,7 +245,32 @@ export type ListUsersQuery = {
     items:  Array< {
       __typename: "User",
       id: string,
-      username: string,
+      username?: string | null,
+      email: string,
+      toRead?: Array< string | null > | null,
+      read?: Array< string | null > | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type UserByUsernameQueryVariables = {
+  username: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UserByUsernameQuery = {
+  userByUsername?:  {
+    __typename: "ModelUserConnection",
+    items:  Array< {
+      __typename: "User",
+      id: string,
+      username?: string | null,
       email: string,
       toRead?: Array< string | null > | null,
       read?: Array< string | null > | null,
@@ -258,7 +289,7 @@ export type OnCreateUserSubscription = {
   onCreateUser?:  {
     __typename: "User",
     id: string,
-    username: string,
+    username?: string | null,
     email: string,
     toRead?: Array< string | null > | null,
     read?: Array< string | null > | null,
@@ -275,7 +306,7 @@ export type OnUpdateUserSubscription = {
   onUpdateUser?:  {
     __typename: "User",
     id: string,
-    username: string,
+    username?: string | null,
     email: string,
     toRead?: Array< string | null > | null,
     read?: Array< string | null > | null,
@@ -292,7 +323,7 @@ export type OnDeleteUserSubscription = {
   onDeleteUser?:  {
     __typename: "User",
     id: string,
-    username: string,
+    username?: string | null,
     email: string,
     toRead?: Array< string | null > | null,
     read?: Array< string | null > | null,
