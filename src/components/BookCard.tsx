@@ -49,7 +49,7 @@ function BookCard({ book, username }: BookCardProps) {
             {book.volumeInfo.title}
           </Text>
         </RouterLink>
-        <Text>{book.volumeInfo.authors.join(', ')}</Text>
+        <Text>{book.volumeInfo.authors?.join(', ')}</Text>
         <Text color="gray.500" isTruncated>
           {book.volumeInfo.publishedDate} • {book.volumeInfo.pageCount} pages
         </Text>
